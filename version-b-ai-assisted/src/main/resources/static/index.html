@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Bookshelf</title>
+<link rel="stylesheet" href="css/style.css?v=3">
+</head>
+<body>
+
+<header>
+  <h1>My Bookshelf</h1>
+  <p class="subtitle">Snap a photo of a book spine, crop it, and it lands on your shelf.</p>
+</header>
+
+<main>
+
+  <section class="panel" id="add-panel">
+    <h2>Add a book</h2>
+
+    <div class="form-row">
+      <label for="photo-input" class="file-label">
+        Choose or capture photo
+        <input type="file" id="photo-input" accept="image/*" capture="environment" hidden>
+      </label>
+      <input type="text" id="title-input" placeholder="Book title (optional)" maxlength="100">
+      <input type="text" id="author-input" placeholder="Author (optional)" maxlength="100">
+      <select id="genre-input">
+        <option value="Fiction">Fiction</option>
+        <option value="Non-fiction">Non-fiction</option>
+        <option value="Sci-Fi">Sci-Fi</option>
+        <option value="Biography">Biography</option>
+        <option value="Mystery">Mystery</option>
+        <option value="Other" selected>Other</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label class="date-label">Started
+        <input type="date" id="started-input">
+      </label>
+      <label class="date-label">Finished
+        <input type="date" id="finished-input">
+      </label>
+      <div class="rating-picker" id="rating-picker">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+      </div>
+    </div>
+
+    <p id="crop-hint" class="hint hidden">Drag on the image below to select the spine, then click "Crop &amp; add".</p>
+
+    <div id="canvas-wrap" class="hidden">
+      <canvas id="source-canvas"></canvas>
+    </div>
+
+    <div class="form-row">
+      <button id="crop-btn" class="btn primary hidden">Crop &amp; add to shelf</button>
+      <button id="reset-btn" class="btn hidden">Start over</button>
+    </div>
+
+    <p id="status-msg" class="status"></p>
+  </section>
+
+  <section class="panel">
+    <h2>Your shelf</h2>
+
+    <div class="shelf-controls">
+      <input type="text" id="search-input" placeholder="Search by title..." class="search-input">
+      <select id="sort-input">
+        <option value="newest">Newest first</option>
+        <option value="oldest">Oldest first</option>
+        <option value="az">Title A-Z</option>
+      </select>
+    </div>
+
+    <div id="genre-chips" class="genre-chips"></div>
+
+    <p id="shelf-count" class="shelf-count"></p>
+    <p id="empty-msg" class="empty">The shelf starts empty — add your first book above and watch it appear.</p>
+    <div id="shelf-tree-wrap">
+      <div id="shelf-tree"></div>
+    </div>
+  </section>
+
+</main>
+
+<div id="book-modal" class="modal-overlay hidden">
+  <div class="modal-card">
+    <button id="modal-close" class="modal-close" aria-label="Close">&times;</button>
+    <div class="modal-image-side">
+      <img id="modal-image" class="modal-image" alt="">
+    </div>
+    <div class="modal-details-side">
+      <h3 id="modal-title" class="modal-title"></h3>
+      <p id="modal-author" class="modal-line"></p>
+      <span id="modal-genre" class="modal-genre-pill"></span>
+      <div id="modal-rating" class="modal-rating"></div>
+      <p id="modal-dates" class="modal-line"></p>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js?v=3"></script>
+</body>
+</html>
