@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Bookshelf</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="page">
+
+    <h1>My Bookshelf</h1>
+
+    <div class="form-box">
+        <h2>Add a book</h2>
+        <form action="#" th:action="@{/add}" method="post" enctype="multipart/form-data">
+            <label>Title</label>
+            <input type="text" name="title" placeholder="Book title">
+
+            <label>Photo</label>
+            <input type="file" name="photo" accept="image/*">
+
+            <input type="submit" value="Add Book">
+        </form>
+    </div>
+
+    <h2>Book list</h2>
+
+    <p class="empty-msg" th:if="${books.size() == 0}">No books added yet.</p>
+
+    <table th:if="${books.size() > 0}">
+        <tr>
+            <th>Photo</th>
+            <th>Title</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="book : ${books}">
+            <td>
+                <img th:if="${book.imageBase64 != ''}" th:src="${book.imageBase64}">
+            </td>
+            <td th:text="${book.title}">Book title</td>
+            <td>
+                <a class="delete-link" th:href="@{/delete/{id}(id=${book.id})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>
+
